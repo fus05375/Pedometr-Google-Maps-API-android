@@ -6,7 +6,7 @@ GoogleMapsApi + android sensors(step counter) + logic
 
 ![stack Overflow](https://github.com/fus05375/Pedometr-Google-Maps-API-android/tree/master/PedometrGoogleMaps/diagram.png)
 
-![Cat](https://raw.githubusercontent.com/fus05375/Pedometr-Google-Maps-API-android/tree/master/PedometrGoogleMaps/diagram.png)
+![Settings Window](https://raw.github.com/fus05375/Pedometr-Google-Maps-API-android/tree/master/PedometrGoogleMaps/diagram.png)
 
 
 
