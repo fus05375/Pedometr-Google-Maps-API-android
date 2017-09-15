@@ -28,6 +28,7 @@
         <activity android:name=".ActivityOne" />
         <activity android:name=".ActivityTwo" />
         <activity android:name=".ActivityThree" />
+        <activity android:name=".ActivityOneVol2" />
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
