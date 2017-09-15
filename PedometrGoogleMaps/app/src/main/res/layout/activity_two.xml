@@ -34,38 +34,42 @@
             android:layout_below="@+id/topBar"
             android:layout_above="@+id/bottomBar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tv_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="179dp"
-                android:text="Steps" />
+                android:text="Steps"
+                android:layout_centerInParent="true"/>
 
             <TextView
                 android:id="@+id/tv_steps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/tv_info"
                 android:layout_below="@+id/tv_info"
                 android:layout_marginTop="20dp"
-                android:gravity="center"
+                android:layout_gravity ="center"
                 android:text="0"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:layout_centerInParent="true"/>
 
             <Button
                 android:id="@+id/btn_reset"
-                android:layout_marginTop="10dp"
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tv_steps"
-                android:layout_centerHorizontal="true"
-                android:text="Start" />
+                android:text="Start"
+                android:layout_centerInParent="true"/>
+
+            <Button
+                android:id="@+id/btn_show_steps"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/btn_reset"
+                android:layout_marginTop="27dp"
+                android:text="Show steps at map"
+                android:layout_centerInParent="true"/>
 
         </RelativeLayout>
 
