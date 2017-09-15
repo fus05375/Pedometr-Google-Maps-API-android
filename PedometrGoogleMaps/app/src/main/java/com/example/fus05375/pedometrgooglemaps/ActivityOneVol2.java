@@ -1,7 +1,9 @@
 package com.example.fus05375.pedometrgooglemaps;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,10 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -32,9 +32,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 
-
-
-public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback,
+public class ActivityOneVol2 extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
@@ -45,7 +43,9 @@ public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback
     Marker mCurrLocationMarker;
     LocationRequest mLocationRequest;
     private GoogleMap mMap;
+    Bundle b;
     TextView mapTitle;
+    ActivityThree activityThree;
 
 
 
@@ -57,12 +57,14 @@ public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_one);
 
         mapTitle=(TextView) findViewById(R.id.tv_map_title);
-        mapTitle.setText("Current Position");
+        mapTitle.setText("Possible Position");
 
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             checkLocationPermission();
         }
+
+
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -81,7 +83,7 @@ public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.ic_arrow:
-                        Intent intent0 = new Intent(ActivityOne.this, MainActivity.class);
+                        Intent intent0 = new Intent(ActivityOneVol2.this, MainActivity.class);
                         startActivity(intent0);
                         break;
 
@@ -90,12 +92,12 @@ public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback
                         break;
 
                     case R.id.ic_books:
-                        Intent intent2 = new Intent(ActivityOne.this, ActivityTwo.class);
+                        Intent intent2 = new Intent(ActivityOneVol2.this, ActivityTwo.class);
                         startActivity(intent2);
                         break;
 
                     case R.id.ic_center_focus:
-                        Intent intent3 = new Intent(ActivityOne.this, ActivityThree.class);
+                        Intent intent3 = new Intent(ActivityOneVol2.this, ActivityThree.class);
                         startActivity(intent3);
                         break;
 
@@ -115,7 +117,7 @@ public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
         //Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     android.Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
@@ -171,8 +173,8 @@ public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback
 
 
 
-//        b = getIntent().getExtras();
-//        double stepsSinceReset = b.getDouble("steps");
+        b = getIntent().getExtras();
+        double stepsSinceReset = b.getDouble("steps");
 
             //Showing Current Location Marker on Map
             LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
@@ -180,6 +182,16 @@ public class ActivityOne extends AppCompatActivity implements OnMapReadyCallback
             markerOptions.position(latLng);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)); // dodawanie ikony
             mCurrLocationMarker = mMap.addMarker(markerOptions);
+
+
+            CircleOptions circleOptions = new CircleOptions();
+            circleOptions.center(latLng);
+
+            circleOptions.radius(stepsSinceReset/2); //just for fun, kinda of estimation :D
+            circleOptions.strokeWidth(14.5f);
+            circleOptions.strokeColor(Color.YELLOW);
+            mMap.addCircle(circleOptions);
+
 
 
         //this code stops location updates

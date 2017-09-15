@@ -27,9 +27,14 @@ public class ActivityTwo extends AppCompatActivity  implements SensorEventListen
     private TextView tv_steps;
     boolean activityRunning = false;
     private Button btn_reset;
+    private Button btn_show_steps;
 
     private int stepsInSensor = 0;
     private int stepsAtReset;
+    int stepsSinceReset=0;
+    Intent yourInent;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,20 +48,24 @@ public class ActivityTwo extends AppCompatActivity  implements SensorEventListen
         tv_steps = (TextView) findViewById(R.id.tv_steps);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         btn_reset= (Button) findViewById(R.id.btn_reset);
+        btn_show_steps =(Button) findViewById(R.id.btn_show_steps);
 
         btn_reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 stepsAtReset = stepsInSensor;
 
-                SharedPreferences.Editor editor =
-                        getSharedPreferences("", MODE_PRIVATE).edit();
-                editor.putInt("stepsAtReset", stepsAtReset);
-                editor.commit();
-
                 // you can now display 0:
                 tv_steps.setText(String.valueOf(0));}
         });
+
+        btn_show_steps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(yourInent);
+                }
+        });
+
 
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavView_Bar);
         BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
@@ -101,11 +110,14 @@ public class ActivityTwo extends AppCompatActivity  implements SensorEventListen
         activityRunning=true;
         Sensor countSensor= sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         if(countSensor!=null){
-            sensorManager.registerListener(this,countSensor,SensorManager.SENSOR_DELAY_FASTEST);
+            sensorManager.registerListener(this,countSensor,SensorManager.SENSOR_DELAY_NORMAL);
         }else{
-            Toast.makeText(this,"Sensor error!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Sensor error! Your phone could not opeate step sensor. ",Toast.LENGTH_SHORT).show();
         }
     }
+
+    /**
+     we don't want to stop counting our steps
 
     @Override
     protected void onPause() {
@@ -113,25 +125,24 @@ public class ActivityTwo extends AppCompatActivity  implements SensorEventListen
         activityRunning=false;
         sensorManager.unregisterListener(this);
     }
+    */
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(activityRunning){
             stepsInSensor = Integer.valueOf((int) event.values[0]);
-            int stepsSinceReset = stepsInSensor - stepsAtReset;
+            stepsSinceReset = stepsInSensor - stepsAtReset;
             tv_steps.setText(String.valueOf(stepsSinceReset));
+
+            yourInent = new Intent(ActivityTwo.this, ActivityOneVol2.class);
+            Bundle b = new Bundle();
+            b.putDouble("steps", stepsSinceReset);
+            yourInent.putExtras(b);
         }else{
             event.values[0] = 0;
         }
     }
 
-//    private void resetStepCount() {
-//
-//        stepsAtReset = stepsInSensor;
-//        Toast.makeText(this,"Wskaźnik zresetowany",Toast.LENGTH_SHORT).show();
-//        tv_steps.setText(String.valueOf(stepsSinceReset));
-//
-//    }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
