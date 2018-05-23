@@ -1,21 +1,18 @@
 
+### Pedometr-Google-Maps-API-android
+
+#Application shows your possible position after doing steps. 
+1.Finds your current position
+2.Do some steps
+3.Shows possibly range of steps
+
 <table sytle="border: 0px;">
 <tr>
 <td><img width="200px" src="3.jpg" /></td>
-</tr>
-</table>
-
-### Pedometr-Google-Maps-API-android
-
-Application shows your possible position after doing steps. 
-
-<table sytle="border: 0px;">
-<tr>
-<td><img width="200px" src="3.jpg" /></td>Find your current position
-<td><img width="200px" src="2.jpg" /></td>Do some steps
-<td><img width="200px" src="1.jpg" /></td>Shows possibly range of steps
+<td><img width="200px" src="2.jpg" /></td>
+<td><img width="200px" src="1.jpg" /></td>
   
-  </tr>
+</tr>
 </table>
 
 
