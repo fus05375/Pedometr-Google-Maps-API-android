@@ -1,10 +1,14 @@
 
 ### Pedometr-Google-Maps-API-android
 
-#Application shows your possible position after doing steps. 
+# Application shows your possible position after doing steps. 
+
 1.Finds your current position
+
 2.Do some steps
+
 3.Shows possibly range of steps
+
 
 <table sytle="border: 0px;">
 <tr>
