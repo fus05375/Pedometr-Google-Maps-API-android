@@ -1,7 +1,7 @@
 
-### Pedometr-Google-Maps-API-android
+# Pedometr-Google-Maps-API-android
 
-# Application shows your possible position after doing steps. 
+## Application shows your possible position after doing steps. 
 
 1.Finds your current position
 
@@ -20,7 +20,7 @@
 </table>
 
 
-## API Reference
+### API Reference
 
 Google Maps API + android sensors + logic
 <td><img width="200px" src="diagram.png" /></td>
